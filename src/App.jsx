@@ -3,7 +3,7 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import FloatingActions from "./components/ui/FloatingActions";
 import { useThemeStore } from "./store/useThemeStore";
-import HomePage from "./pages/HomePage";
+import Home from "./pages/Home";
 
 function App() {
   const { isDark } = useThemeStore();
@@ -20,7 +20,7 @@ function App() {
     // الخلفية والخطوط الأساسية متحددة في index.css (body)
     <div className="min-h-screen transition-colors duration-300">
       <Header />
-      <HomePage />
+      <Home />
       <FloatingActions />
       <Footer />
     </div>

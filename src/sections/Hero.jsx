@@ -1,8 +1,6 @@
 import { MdThermostat, MdLightbulb, MdPlayCircle } from "react-icons/md";
 import Button from "../components/ui/Button";
 import GlassPanel from "../components/ui/GlassPanel";
-// 1. استيراد الصورة من ملفات المشروع
-// تأكد إن الاسم والمسار مطابقين للصورة اللي معاك
 import heroBgImage from '../assets/heroIMG.png'; 
 
 const Hero = () => {
@@ -17,7 +15,7 @@ const Hero = () => {
         />
 
        
-        <div className="absolute inset-0 bg-black/80" />
+        <div className="absolute inset-0 dark:bg-black/80 bg-white/20" />
       </div>
 
 
