@@ -17,7 +17,7 @@ const reviews = [
 
 const Testimonials = () => {
   return (
-    <section className="py-24 bg-[#0e0e0e] border-y border-white/5 transition-colors duration-300 dark:bg-[#0e0e0e] bg-gray-50">
+    <section className="py-24 border-y border-white/5 transition-colors duration-300 dark:bg-[#0e0e0e] bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center">Client Experiences</h2>
         <div className="grid md:grid-cols-2 gap-8">

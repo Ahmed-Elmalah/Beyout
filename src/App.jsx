@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-import HomePage from "./pages/HomePage";
 import FloatingActions from "./components/ui/FloatingActions";
 import { useThemeStore } from "./store/useThemeStore";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const { isDark } = useThemeStore();
 
   useEffect(() => {
-    // ده اللي بيتحكم في الثيم للموقع كله
     if (isDark) {
       document.documentElement.classList.add("dark");
     } else {

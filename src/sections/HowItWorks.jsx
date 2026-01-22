@@ -19,7 +19,7 @@ const HowItWorks = () => {
         
         <div className="relative">
           {/* الخط اللي واصل بينهم */}
-          <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 z-0" />
+          <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-linear-to-r from-primary/20 via-primary to-primary/20 z-0" />
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             {steps.map((step, idx) => (
