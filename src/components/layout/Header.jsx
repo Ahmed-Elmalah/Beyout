@@ -4,8 +4,8 @@ import Button from "../ui/Button";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDark, setIsDark] = useState(true); // Default to dark
-  const [lang, setLang] = useState("EN");
+  const [isDark, setIsDark] = useState(true);
+  const [lang, setLang] = useState("AR");
 
   // Toggle Dark Mode Logic
   const toggleTheme = () => {
@@ -33,7 +33,7 @@ const Header = () => {
         {/* هنا اللعبة: md:flex (ظاهر في التابلت) لكن md:gap-4 (مسافة ضيقة) و lg:gap-8 (مسافة واسعة) */}
         <nav className="hidden md:flex items-center md:gap-3 lg:gap-8">
           <a href="#" className="md:text-xs lg:text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">Home</a>
-          {['Features', 'How it Works', 'Packages', 'Contact'].map((item) => (
+          {['Features', 'Best sellers', 'Packages', 'Contact'].map((item) => (
             <a 
               key={item} 
               href={`#${item.toLowerCase().replace(/\s/g, '-')}`} 
@@ -81,7 +81,7 @@ const Header = () => {
         {isMenuOpen && (
           <div className="absolute top-0 left-0 w-full h-screen bg-white/95 dark:bg-[#121212]/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden transition-all duration-300">
             <a href="#" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold text-slate-900 dark:text-white hover:text-primary">Home</a>
-            {['Features', 'How it Works', 'Packages', 'Contact'].map((item) => (
+            {['Features', 'Best sellers', 'Packages', 'Contact'].map((item) => (
               <a 
                 key={item} 
                 href={`#${item.toLowerCase().replace(/\s/g, '-')}`} 

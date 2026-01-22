@@ -1,8 +1,8 @@
 import Button from "./Button";
 
 const ContactForm = () => {
-  const inputClasses = "w-full bg-gray-50 dark:bg-[#1E1E1E] border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder-gray-400 dark:placeholder-gray-600";
-  const labelClasses = "block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2";
+  const inputClasses = "resize-none w-full bg-white dark:bg-[#1E1E1E] border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder-gray-400 dark:placeholder-gray-600 shadow-sm";
+  const labelClasses = "block text-xs font-bold text-gray-700 dark:text-gray-500 uppercase tracking-wider mb-2";
 
   return (
     <form className="space-y-6">
@@ -28,7 +28,7 @@ const ContactForm = () => {
         <label className={labelClasses}>Message</label>
         <textarea rows="4" placeholder="Tell us about your property..." className={inputClasses}></textarea>
       </div>
-      <Button type="button" className="w-full mt-4">Request Consultation</Button>
+      <Button type="button" className="w-full mt-4 justify-center">Request Consultation</Button>
     </form>
   );
 };

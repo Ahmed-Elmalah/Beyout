@@ -15,7 +15,7 @@ const Hero = () => {
         />
 
        
-        <div className="absolute inset-0 dark:bg-black/80 bg-white/20" />
+        <div className="absolute inset-0 dark:bg-black/80 bg-black/30" />
       </div>
 
 
@@ -56,8 +56,8 @@ const Hero = () => {
                 </div>
                 <div>
                   {/* تعديل الألوان هنا لتناسب الخلفية الغامقة */}
-                  <p className="text-xs text-gray-400 uppercase">Living Room</p>
-                  <p className="text-white font-bold">22°C • Cool</p>
+                  <p className="text-xs text-black dark:text-gray-400 uppercase">Living Room</p>
+                  <p className="text-black dark:text-white font-bold">22°C • Cool</p>
                 </div>
               </div>
               <div className="h-8 w-12 bg-primary/20 rounded-full p-1 relative cursor-pointer">
@@ -72,8 +72,8 @@ const Hero = () => {
                   <MdLightbulb className="text-purple-400 text-xl" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-400 uppercase">Mood Lighting</p>
-                  <p className="text-white font-bold">Evening Relax</p>
+                  <p className="text-xs text-black dark:text-gray-400 uppercase">Mood Lighting</p>
+                  <p className="text-black dark:text-white font-bold">Evening Relax</p>
                 </div>
               </div>
               <div className="h-8 w-12 bg-purple-500/20 rounded-full p-1 relative cursor-pointer">

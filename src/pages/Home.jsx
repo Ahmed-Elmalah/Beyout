@@ -5,6 +5,7 @@ import HowItWorks from "../sections/HowItWorks";
 import Packages from "../sections/Packages";
 import Testimonials from "../sections/Testimonials";
 import Contact from "../sections/Contact";
+import BestSellers from "../sections/BestSellers";
 
 const HomePage = () => {
   return (
@@ -12,7 +13,8 @@ const HomePage = () => {
       <Hero />
       <Partners />
       <Features />
-      <HowItWorks />
+      <BestSellers />
+      {/* <HowItWorks /> */}
       <Packages />
       <Testimonials />
       <Contact />
