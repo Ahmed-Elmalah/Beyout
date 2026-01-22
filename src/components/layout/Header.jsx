@@ -65,7 +65,7 @@ const Header = () => {
           {/* CTA Button */}
           {/* إخفاء الزرار في الموبايل، وظهوره في التابلت بحجم أصغر */}
           <div className="hidden sm:block">
-            <Button className="!py-2 !px-3 !text-[10px] lg:!text-xs">Free Consultation</Button>
+            <Button className="py-2! px-3! text-[10px]! lg:text-xs!">Free Consultation</Button>
           </div>
 
           {/* Mobile Burger Icon (Visible ONLY on mobile 'sm' and below, Hidden on 'md' Tablet) */}
@@ -92,7 +92,7 @@ const Header = () => {
               </a>
             ))}
             <div className="sm:hidden mt-4">
-                <Button className="!py-3 !px-8">Free Consultation</Button>
+                <Button className="py-3! px-8!">Free Consultation</Button>
             </div>
           </div>
         )}
