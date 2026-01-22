@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+/* ده السطر السحري عشان الـ Toggle يشتغل */
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* الألوان الأساسية للبراند */
+  --color-primary: #06f9f9;
+  --color-accent-gold: #D4AF37;
+  
+  /* الخطوط */
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Noto Sans", sans-serif;
+
+  /* الظلال */
+  --shadow-neon: 0 0 10px rgba(6, 249, 249, 0.5), 0 0 20px rgba(6, 249, 249, 0.3);
+  --shadow-gold: 0 0 10px rgba(212, 175, 55, 0.5);
+
+  /* الأنيميشن */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-bounce-slow: bounce 3s infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+  
+  body {
+    /* هنا بنحدد الخلفية ولون الخط للوضع الفاتح والغامق بشكل مباشر */
+    @apply bg-[#f5f8f8] text-slate-900 dark:bg-[#121212] dark:text-white font-display overflow-x-hidden transition-colors duration-300;
+  }
+}
+
+@layer utilities {
+  /* الـ Glass Panel دلوقتي هتاخد لون ثابت حسب المود */
+  .glass-panel {
+    @apply bg-white/60 dark:bg-[#1e1e1e]/60 backdrop-blur-xl border border-black/5 dark:border-white/10;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 10px rgba(6, 249, 249, 0.3);
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { @apply bg-[#f5f8f8] dark:bg-[#121212]; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #06f9f9; }
