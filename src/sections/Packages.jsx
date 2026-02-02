@@ -1,15 +1,11 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 import PriceCard from "../components/ui/PriceCard";
-import Button from "../components/ui/Button"; // هنحتاج الزرار
+import Button from "../components/ui/Button";
 import { packagesData } from "../data/packagesData";
 
 const Packages = () => {
-  const [showAll, setShowAll] = useState(false);
-
-  // اللوجيك هنا:
-  // لو showAll = false -> خد أول 2 باكدج بس (عشان مع الكارت الـ Custom يبقوا 3)
-  // لو showAll = true  -> اعرض كل الباكدجات
-  const visiblePackages = showAll ? packagesData : packagesData.slice(0, 2);
+  // Select only the first 2 packages for the Home page
+  const homePackages = packagesData.slice(0, 2);
 
   return (
     <section className="py-24 bg-gray-50 dark:bg-[#121212] transition-colors duration-300" id="packages">
@@ -23,34 +19,34 @@ const Packages = () => {
             </p>
         </div>
         
-        {/* The Grid */}
+        {/* The Grid (2 Packages + 1 Custom Card) */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch mb-12">
           
-          {/* 1. عرض الباكدجات (بناءً على الحالة) */}
-          {visiblePackages.map((pkg) => (
+          {/* 1. Map the first 2 packages */}
+          {homePackages.map((pkg) => (
             <PriceCard 
               key={pkg.id}
               {...pkg}
             />
           ))}
 
-          {/* 2. كارت الـ Custom (دايماً موجود في الآخر) */}
-          {/* ده هيكون رقم 3 في الحالة العادية، ورقم 9 لما نفتح الكل */}
-          <a href="/products" className="block h-full">
+          {/* 2. Custom Package Card (Links to Builder Page) */}
+          <Link to="/custom-package" className="block h-full">
             <PriceCard isCustom={true} />
-          </a>
+          </Link>
 
         </div>
 
-        {/* Show More / Less Button */}
+        {/* View All Button (Links to All Packages Page) */}
         <div className="flex justify-center">
-            <Button 
-                variant="outline" 
-                onClick={() => setShowAll(!showAll)}
-                className="min-w-[200px] border-gray-300 dark:border-white/20 text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/5"
-            >
-                {showAll ? "Show Less" : "View All Packages"}
-            </Button>
+            <Link to="/packages">
+                <Button 
+                    variant="outline" 
+                    className="min-w-[200px] border-gray-300 dark:border-white/20 text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/5"
+                >
+                    View All Packages
+                </Button>
+            </Link>
         </div>
 
       </div>

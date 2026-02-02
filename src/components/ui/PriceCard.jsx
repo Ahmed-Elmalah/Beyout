@@ -1,7 +1,16 @@
 import { MdCheckCircle, MdSettings } from "react-icons/md";
+import { FaWhatsapp } from "react-icons/fa"; 
 import Button from "./Button";
+import { Link } from "react-router-dom"; 
 
 const PriceCard = ({ title, price, hardware = [], features = [], isPopular, isCustom }) => {
+  
+  const handleOrderClick = () => {
+    const message = `مرحباً Beyout، أنا مهتم بباقة ${title} بسعر ${price} جنيه. محتاج تفاصيل أكتر.`;
+    const url = `https://wa.me/201064334334?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
   return (
     <div className={`relative flex flex-col h-full group ${isPopular ? 'md:-translate-y-4' : ''}`}>
       
@@ -55,9 +64,11 @@ const PriceCard = ({ title, price, hardware = [], features = [], isPopular, isCu
                         ))}
                     </ul>
                     <div className="mt-auto">
-                        <Button className="w-full justify-center bg-accent-gold text-black hover:bg-yellow-500 shadow-gold">
-                            Start Building
-                        </Button>
+                        <Link to="/custom-package" className="w-full">
+                            <Button className="w-full justify-center bg-accent-gold text-black hover:bg-yellow-500 shadow-gold">
+                                Start Building
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             ) : (
@@ -84,13 +95,15 @@ const PriceCard = ({ title, price, hardware = [], features = [], isPopular, isCu
                         ))}
                     </ul>
 
-                    {/* Action Button */}
+                    {/* Action Button (WhatsApp) */}
                     <div className="mt-auto pt-6">
                         <Button 
+                            onClick={handleOrderClick}
                             variant={isPopular ? "neon" : "outline"} 
                             className={`w-full justify-center ${!isPopular && 'text-slate-900 dark:text-white border-gray-300 dark:border-white/20 hover:bg-gray-100 dark:hover:bg-white/5'}`}
                         >
-                            {isPopular ? "Order Now" : "View Details"}
+                            <FaWhatsapp className="text-lg" />
+                            {isPopular ? "Order Now" : "Order Details"}
                         </Button>
                     </div>
                 </>

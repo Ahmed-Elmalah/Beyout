@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { MdChevronLeft, MdChevronRight, MdArrowForward } from "react-icons/md";
+import { Link } from "react-router-dom"; // 1. Import Link
 import ProductCard from "../components/ui/ProductCard";
 
 const products = [
@@ -42,7 +43,7 @@ const products = [
 
 const BestSellers = () => {
   const scrollRef = useRef(null);
-  const [isPaused, setIsPaused] = useState(false); // عشان نوقف الحركة لما اليوزر يعمل هوفر
+  const [isPaused, setIsPaused] = useState(false);
 
   const scroll = (direction) => {
     const { current } = scrollRef;
@@ -51,7 +52,6 @@ const BestSellers = () => {
     if (direction === "left") {
       current.scrollLeft -= 350;
     } else {
-      // لو وصل للآخر نرجعه للأول (Infinite Scroll Effect)
       if (current.scrollLeft + current.clientWidth >= current.scrollWidth - 10) {
         current.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
@@ -60,17 +60,15 @@ const BestSellers = () => {
     }
   };
 
-  // Auto Scroll Logic
   useEffect(() => {
-    // لو اليوزر مش واقف بالماوس، حرك السلايدر
     let interval;
     if (!isPaused) {
       interval = setInterval(() => {
         scroll("right");
-      }, 3000); // بيتحرك كل 3 ثواني
+      }, 3000);
     }
     return () => clearInterval(interval);
-  }, [isPaused]); // بيعيد التشغيل لما حالة التوقف تتغير
+  }, [isPaused]);
 
   return (
     <section id="best-sellers" className="py-24 bg-gray-50 dark:bg-[#121212] relative overflow-hidden transition-colors duration-300">
@@ -103,7 +101,6 @@ const BestSellers = () => {
         {/* Slider Container */}
         <div 
           ref={scrollRef}
-          // لما الماوس يدخل يوقف الأوتو، ولما يخرج يشتغل تاني
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           className="flex gap-6 overflow-x-auto pb-10 scroll-smooth snap-x snap-mandatory"
@@ -116,12 +113,13 @@ const BestSellers = () => {
           ))}
         </div>
 
-        {/* Bottom CTA */}
+        {/* Bottom CTA - Updated Link */}
         <div className="flex justify-center mt-8">
-            <a href="/products" className="group flex items-center gap-2 text-primary font-bold hover:text-slate-900 dark:hover:text-white transition-colors">
-                Explore All Products & Accessories
+            {/* 2. Changed <a> to <Link> pointing to the builder page */}
+            <Link to="/custom-package" className="group flex items-center gap-2 text-primary font-bold hover:text-slate-900 dark:hover:text-white transition-colors">
+                Explore All Products & Build Your Own
                 <MdArrowForward className="group-hover:translate-x-1 transition-transform" />
-            </a>
+            </Link>
         </div>
 
       </div>

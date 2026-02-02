@@ -1,8 +1,10 @@
 import { MdAdd } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ title, category, price, image }) => {
+  const navigate = useNavigate();
   return (
-    <div className="min-w-[280px] md:min-w-[320px] bg-white dark:bg-[#1E1E1E] rounded-3xl p-4 relative group hover:translate-y-[-5px] transition-all duration-300 border border-gray-200 dark:border-white/5 hover:border-primary/50 dark:hover:border-primary/30 shadow-sm hover:shadow-lg dark:shadow-none">
+    <div onClick={()=> navigate('/custom-package')} className="min-w-[280px] md:min-w-[320px] bg-white dark:bg-[#1E1E1E] rounded-3xl p-4 relative group hover:translate-y-[-5px] transition-all duration-300 border border-gray-200 dark:border-white/5 hover:border-primary/50 dark:hover:border-primary/30 shadow-sm hover:shadow-lg dark:shadow-none">
       
       {/* Image Area */}
       <div className="h-[200px] w-full bg-gray-100 dark:bg-[#121212] rounded-2xl mb-6 flex items-center justify-center overflow-hidden relative">
