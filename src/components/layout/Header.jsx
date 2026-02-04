@@ -1,60 +1,88 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MdSmartToy, MdMenu, MdClose, MdDarkMode, MdLightMode } from "react-icons/md";
+import { Link, useLocation, useNavigate } from "react-router-dom"; // Import Router Hooks
 import Button from "../ui/Button";
+import { useThemeStore } from "../../store/useThemeStore"; // Import Zustand Store
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDark, setIsDark] = useState(true);
-  const [lang, setLang] = useState("AR");
+  const [lang, setLang] = useState("EN"); // Default Language
 
-  // Toggle Dark Mode Logic
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle("dark");
-  };
+  // Hooks for Navigation Logic
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Toggle Language Logic
+  // Theme Store (Zustand handles dark mode logic globally)
+  const { isDark, toggleTheme } = useThemeStore();
+
+  // Toggle Language Logic (Placeholder for now)
   const toggleLang = () => {
     setLang((prev) => (prev === "EN" ? "AR" : "EN"));
   };
+
+  // Smart Navigation Function
+  const handleNavigation = (sectionId) => {
+    setIsMenuOpen(false); // Close mobile menu first
+
+    // Check if we are NOT on the home page
+    if (location.pathname !== "/") {
+      navigate("/"); // Go to Home
+      // Wait a bit for page to load then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) element.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      // If already on Home, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
+
+  const navLinks = [
+    { name: "Home", id: "hero" },
+    { name: "Features", id: "features" },
+    { name: "Best Sellers", id: "best-sellers" },
+    { name: "Packages", id: "packages" },
+    { name: "Contact", id: "contact" },
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         
         {/* Logo */}
-        <div className="flex items-center gap-2 lg:gap-3 z-50">
+        <Link to="/" className="flex items-center gap-2 lg:gap-3 z-50 cursor-pointer">
           <MdSmartToy className="text-primary text-2xl md:text-3xl" />
-          {/* تصغير الخط في التابلت (md) وتكبيره في الشاشات الكبيرة (lg) */}
           <span className="text-xl lg:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Beyout</span>
-        </div>
+        </Link>
 
         {/* Desktop & Tablet Navigation */}
-        {/* هنا اللعبة: md:flex (ظاهر في التابلت) لكن md:gap-4 (مسافة ضيقة) و lg:gap-8 (مسافة واسعة) */}
         <nav className="hidden md:flex items-center md:gap-3 lg:gap-8">
-          <a href="#" className="md:text-xs lg:text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">Home</a>
-          {['Features', 'Best sellers', 'Packages', 'Contact'].map((item) => (
-            <a 
-              key={item} 
-              href={`#${item.toLowerCase().replace(/\s/g, '-')}`} 
-              className="md:text-xs lg:text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
+          {navLinks.map((link) => (
+            <button 
+              key={link.name} 
+              onClick={() => handleNavigation(link.id)} 
+              className="cursor-pointer bg-transparent border-none md:text-xs lg:text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
             >
-              {item}
-            </a>
+              {link.name}
+            </button>
           ))}
         </nav>
 
         {/* Actions Area */}
-        {/* تقليل المسافة بين الزراير في التابلت */}
         <div className="flex items-center gap-2 lg:gap-5 z-50">
           
           {/* Theme Toggle */}
-          {/* تم إزالة أي كلاس text-white ثابت عشان الشرط يشتغل صح */}
           <button 
             onClick={toggleTheme} 
-            className={`p-2 rounded-full transition-colors cursor-pointer hover:bg-black/5 dark:hover:bg-white/10 ${isDark ? 'text-accent-gold' : 'text-slate-900'}`}
+            className="p-2 rounded-full transition-colors cursor-pointer hover:bg-black/5 dark:hover:bg-white/10 text-slate-900 dark:text-white"
           >
-            {isDark ? <MdLightMode className="text-lg lg:text-xl" /> : <MdDarkMode className="text-lg lg:text-xl" />}
+            {isDark ? <MdLightMode className="text-lg lg:text-xl text-accent-gold" /> : <MdDarkMode className="text-lg lg:text-xl" />}
           </button>
 
           {/* Language Toggle */}
@@ -62,13 +90,14 @@ const Header = () => {
             <span>{lang}</span>
           </button>
 
-          {/* CTA Button */}
-          {/* إخفاء الزرار في الموبايل، وظهوره في التابلت بحجم أصغر */}
+          {/* CTA Button (Link to Custom Builder) */}
           <div className="hidden sm:block">
-            <Button className="py-2! px-3! text-[10px]! lg:text-xs!">Free Consultation</Button>
+            <Link to="/custom-package">
+                <Button className="py-2! px-3! text-[10px]! lg:text-xs!">Get Started</Button>
+            </Link>
           </div>
 
-          {/* Mobile Burger Icon (Visible ONLY on mobile 'sm' and below, Hidden on 'md' Tablet) */}
+          {/* Mobile Burger Icon */}
           <button 
             className="md:hidden p-2 text-slate-900 dark:text-white cursor-pointer"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -76,27 +105,28 @@ const Header = () => {
             {isMenuOpen ? <MdClose className="text-2xl" /> : <MdMenu className="text-2xl" />}
           </button>
         </div>
-
-        {/* Mobile Menu Overlay */}
-        {isMenuOpen && (
-          <div className="absolute top-0 left-0 w-full h-screen bg-white/95 dark:bg-[#121212]/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden transition-all duration-300">
-            <a href="#" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold text-slate-900 dark:text-white hover:text-primary">Home</a>
-            {['Features', 'Best sellers', 'Packages', 'Contact'].map((item) => (
-              <a 
-                key={item} 
-                href={`#${item.toLowerCase().replace(/\s/g, '-')}`} 
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-bold text-slate-900 dark:text-white hover:text-primary"
-              >
-                {item}
-              </a>
-            ))}
-            <div className="sm:hidden mt-4">
-                <Button className="py-3! px-8!">Free Consultation</Button>
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className="absolute top-0 left-0 w-full h-screen bg-white/95 dark:bg-[#121212]/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden transition-all duration-300 z-40">
+          {navLinks.map((link) => (
+            <button 
+              key={link.name} 
+              onClick={() => handleNavigation(link.id)} 
+              className="text-2xl font-bold text-slate-900 dark:text-white hover:text-primary bg-transparent border-none cursor-pointer"
+            >
+              {link.name}
+            </button>
+          ))}
+          
+          <div className="sm:hidden mt-4">
+            <Link to="/custom-package" onClick={() => setIsMenuOpen(false)}>
+                <Button className="py-3! px-8!">Get Started</Button>
+            </Link>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
