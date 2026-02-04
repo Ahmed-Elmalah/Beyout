@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import PriceCard from "../components/ui/PriceCard";
-import Button from "../components/ui/Button";
+// import Button from "../components/ui/Button";
 import { packagesData } from "../data/packagesData";
 
 const Packages = () => {
@@ -40,12 +40,12 @@ const Packages = () => {
         {/* View All Button (Links to All Packages Page) */}
         <div className="flex justify-center">
             <Link to="/packages">
-                <Button 
+                <button 
                     variant="outline" 
-                    className="min-w-[200px] border-gray-300 dark:border-white/20 text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/5"
+                    className="min-w-50 text-black bg-accent-gold hover:-translate-y-1 px-6 py-3 rounded-lg font-bold transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
                 >
                     View All Packages
-                </Button>
+                </button>
             </Link>
         </div>
 
