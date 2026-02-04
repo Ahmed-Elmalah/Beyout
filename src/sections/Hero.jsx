@@ -38,10 +38,7 @@ const Hero = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <Button className="py-4 px-8">Get Your Free Consultation</Button>
-            {/* تعديل ألوان زرار الـ Outline عشان يليق عالخلفية الغامقة */}
-            <Button variant="outline" className="py-4 px-8 text-white border-white/20 hover:bg-white/10">
-              <MdPlayCircle className="text-xl group-hover:text-primary" /> Watch Demo
-            </Button>
+
           </div>
         </div>
 

@@ -84,7 +84,7 @@ const PriceCard = ({ title, price, hardware = [], features = [], isPopular, isCu
                     <ul className="space-y-3 font-body text-gray-600 dark:text-gray-300 text-right mt-2" dir="rtl">
                         {features.map((item, i) => (
                             <li key={i} className="flex items-start gap-3">
-                                <span className="mt-1 flex-shrink-0">
+                                <span className="mt-1 shrink-0">
                                     <MdCheckCircle className={`text-lg ${isPopular ? 'text-primary' : 'text-gray-500 dark:text-gray-600'}`} />
                                 </span>
                                 <span className="text-sm font-medium">{item}</span>
