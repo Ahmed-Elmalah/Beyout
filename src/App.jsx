@@ -7,6 +7,7 @@ import { useThemeStore } from "./store/useThemeStore";
 import Home from "./pages/Home";
 import AllPackagesPage from "./pages/AllPackagesPage"; // Import the new page
 import CustomBuilderPage from "./pages/CustomBuilderPage";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { isDark } = useThemeStore();
@@ -28,6 +29,15 @@ function App() {
 
   return (
     <div className="min-h-screen transition-colors duration-300 bg-gray-50 dark:bg-[#121212]">
+      <Toaster 
+        position="top-center"
+        toastOptions={{
+          style: {
+            background: isDark ? '#333' : '#fff',
+            color: isDark ? '#fff' : '#333',
+          },
+        }}
+      />
       <Header />
       
       {/* Define App Routes */}

@@ -1,7 +1,6 @@
 import { MdCheckCircle, MdSettings } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa"; 
 import Button from "./Button";
-import { Link } from "react-router-dom"; 
 
 const PriceCard = ({ title, price, hardware = [], features = [], isPopular, isCustom }) => {
   
@@ -64,11 +63,9 @@ const PriceCard = ({ title, price, hardware = [], features = [], isPopular, isCu
                         ))}
                     </ul>
                     <div className="mt-auto">
-                        <Link to="/custom-package" className="w-full">
                             <Button className="w-full justify-center bg-accent-gold text-black hover:bg-yellow-500 shadow-gold">
                                 Start Building
                             </Button>
-                        </Link>
                     </div>
                 </div>
             ) : (
