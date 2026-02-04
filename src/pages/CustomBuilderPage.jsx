@@ -1,81 +1,98 @@
-import { MdTrendingUp, MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { useState, useMemo } from "react";
 import BuilderProductCard from "../components/ui/BuilderProductCard";
 import BuilderSidebar from "../components/ui/BuilderSidebar";
 import BuilderCart from "../components/ui/BuilderCart";
-import { productsData } from "../data/productsData"; 
+import { productsData } from "../data/productsData";
+import { useBuilderStore } from "../store";
 
 const CustomBuilderPage = () => {
+  // State for filtering (Local state is fine for UI filtering)
+  const [selectedCategory, setSelectedCategory] = useState("All Products");
+
+  // Global State from Zustand
+  const {
+    cart,
+    addToCart,
+    removeFromCart,
+    decreaseQuantity,
+    clearCart,
+    getTotalPrice,
+  } = useBuilderStore();
+
+  const totalPrice = getTotalPrice();
+
+  // Filter Logic
+  const filteredProducts = useMemo(() => {
+    if (selectedCategory === "All Products") return productsData;
+    return productsData.filter((item) => item.category === selectedCategory);
+  }, [selectedCategory]);
+
+  // WhatsApp Checkout Logic
+  const handleCheckout = () => {
+    if (cart.length === 0) return alert("Your package is empty!");
+
+    let message =
+      "Hello Beyout, I have built my custom smart home package:\n\n";
+    cart.forEach((item) => {
+      message += `- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} EGP\n`;
+    });
+    message += `\n*Total Estimate: ${totalPrice.toLocaleString()} EGP*`;
+
+    const url = `https://wa.me/201064334334?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  };
+
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-[#0f2323] transition-colors duration-300 pt-24 pb-12">
+    <main className="min-h-screen bg-gray-50 dark:bg-[#121212] transition-colors duration-300 pt-24 pb-12">
       <div className="max-w-400 mx-auto px-4 lg:px-6">
-        {/* Page Hero */}
-        <div className="flex flex-col gap-2 mb-8">
+        {/* Header */}
+        <div className="flex flex-col gap-2 mb-8 text-center md:text-left">
           <h1 className="text-slate-900 dark:text-white text-4xl lg:text-5xl font-black leading-tight tracking-[-0.033em]">
             Build Your{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-teal-400 text-glow">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-teal-400">
               Smart Ecosystem
             </span>
           </h1>
-          <p className="text-slate-500 dark:text-[#8ecccc] text-base lg:text-lg font-normal max-w-2xl">
-            Curate a custom package tailored to your lifestyle. Start from
-            scratch or choose a preset.
+          <p className="text-slate-500 dark:text-gray-400 text-base lg:text-lg font-normal max-w-2xl">
+            Select your devices and see the estimated cost instantly.
           </p>
         </div>
 
-        {/* Trending Carousel Section (Static for now) */}
-        <section className="w-full mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-slate-900 dark:text-white text-xl font-bold flex items-center gap-2">
-              <MdTrendingUp className="text-primary" /> Trending Now
-            </h2>
-            <div className="flex gap-2">
-              <button className="p-1 rounded-full hover:bg-slate-200 dark:hover:bg-[#214a4a] text-slate-500 dark:text-gray-400 cursor-pointer">
-                <MdChevronLeft size={24} />
-              </button>
-              <button className="p-1 rounded-full hover:bg-slate-200 dark:hover:bg-[#214a4a] text-slate-500 dark:text-gray-400 cursor-pointer">
-                <MdChevronRight size={24} />
-              </button>
-            </div>
-          </div>
-
-          {/* Simple Horizontal List */}
-          <div className="flex overflow-x-auto gap-4 pb-4 no-scrollbar scroll-smooth">
-            {/* Reusing Product Card for carousel but simplified if needed, or mapping small subset */}
-            {productsData.slice(0, 4).map((item) => (
-              <div key={item.id} className="min-w-70 no-scrollbar">
-                <BuilderProductCard
-                  {...item}
-                  rating={4.8} // Dummy rating
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Main Content Area */}
         <div className="flex flex-col lg:flex-row gap-8 h-full relative">
-          {/* 1. Sidebar Filters */}
-          <BuilderSidebar />
+          {/* Sidebar */}
+          <BuilderSidebar
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+          />
 
-          {/* 2. Product Grid */}
+          {/* Grid */}
           <div className="flex-1">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {productsData.map((product) => (
+              {filteredProducts.map((product) => (
                 <BuilderProductCard
                   key={product.id}
-                  title={product.name}
-                  category={product.category}
-                  price={product.price}
-                  image={product.image}
-                  rating={4.5} // Dummy rating
-                  isTopRated={product.price > 2000} // Example logic for badge
+                  {...product}
+                  onAdd={() => addToCart(product)}
                 />
               ))}
             </div>
+            {filteredProducts.length === 0 && (
+              <p className="text-center text-gray-500 mt-10">
+                No products found in this category.
+              </p>
+            )}
           </div>
 
-          {/* 3. Sticky Cart */}
-          <BuilderCart />
+          {/* Cart (متصلة بالستور من خلال الصفحة) */}
+          <BuilderCart
+            cartItems={cart}
+            totalPrice={totalPrice}
+            onRemove={removeFromCart}
+            onCheckout={handleCheckout}
+            onIncrease={addToCart}
+            onDecrease={decreaseQuantity}
+            onClear={clearCart}
+          />
         </div>
       </div>
     </main>

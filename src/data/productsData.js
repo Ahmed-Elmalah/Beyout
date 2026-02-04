@@ -4,55 +4,64 @@ export const productsData = [
     name: "Smart Touch Switch (1 Gang)",
     price: 900,
     category: "Lighting",
-    image: "https://images.unsplash.com/photo-1558002038-1091a1661116?auto=format&fit=crop&w=300&q=60"
+    image: "https://images.unsplash.com/photo-1558002038-1091a1661116?auto=format&fit=crop&w=300&q=60",
+    rating: 4.8
   },
   {
     id: 2,
-    name: "Smart Touch Switch (3 Gang)",
-    price: 1200,
+    name: "WiFi Smart Bulb RGB",
+    price: 450,
     category: "Lighting",
-    image: "https://images.unsplash.com/photo-1558002038-1091a1661116?auto=format&fit=crop&w=300&q=60"
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=300&q=60",
+    rating: 4.5
   },
   {
     id: 3,
-    name: "RGB Smart Strip (5m)",
-    price: 850,
-    category: "Lighting",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=300&q=60"
+    name: "Outdoor Security Camera",
+    price: 2500,
+    category: "Security",
+    image: "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?auto=format&fit=crop&w=300&q=60",
+    rating: 4.9,
+    isTopRated: true
   },
   {
     id: 4,
-    name: "Motion Sensor",
-    price: 450,
-    category: "Sensors",
-    image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=300&q=60"
+    name: "Smart Door Lock Pro",
+    price: 4200,
+    category: "Security",
+    image: "https://images.unsplash.com/photo-1558002038-1091a1661116?auto=format&fit=crop&w=300&q=60",
+    rating: 4.7
   },
   {
     id: 5,
-    name: "Smart Door Lock",
-    price: 3500,
-    category: "Security",
-    image: "https://images.unsplash.com/photo-1558002038-1091a1661116?auto=format&fit=crop&w=300&q=60"
+    name: "Google Nest Hub",
+    price: 3800,
+    category: "Hubs",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&q=60",
+    rating: 4.6
   },
   {
     id: 6,
-    name: "Amazon Alexa Echo Dot",
-    price: 2200,
-    category: "Hubs & Voice",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&q=60"
+    name: "Amazon Echo Dot 5",
+    price: 1800,
+    category: "Hubs",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&q=60",
+    rating: 4.4
   },
   {
     id: 7,
-    name: "Smart Curtain Motor",
-    price: 2800,
-    category: "Curtains",
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=300&q=60"
+    name: "Motion Sensor Zigbee",
+    price: 550,
+    category: "Sensors",
+    image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=300&q=60",
+    rating: 4.2
   },
   {
     id: 8,
-    name: "Indoor Security Camera",
-    price: 1100,
-    category: "Security",
-    image: "https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?auto=format&fit=crop&w=300&q=60"
+    name: "Door/Window Sensor",
+    price: 400,
+    category: "Sensors",
+    image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=300&q=60",
+    rating: 4.3
   }
 ];
